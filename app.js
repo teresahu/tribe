@@ -4,11 +4,19 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+// linking database
+
+var User = require('./models/user');
+var Event = require('./models/event');
+mongoose.connect('mongodb://localhost/tribe');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
