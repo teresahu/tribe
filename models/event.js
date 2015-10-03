@@ -3,7 +3,7 @@ var Like = require('./like');
 
 var EventSchema = new mongoose.Schema({
   name: String,
-  likes: [Like],
+  likes: [Like.schema],
   users: [{ type: mongoose.Schema.ObjectId, ref: 'User' }]
 });
 
