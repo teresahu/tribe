@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session());
+app.use(session({ secret: 'Tribe321'}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
