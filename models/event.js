@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
-var Like = require('./like');
+var Interest = require('./interest');
 
 var EventSchema = new mongoose.Schema({
   name: String,
-  likes: [Like.schema],
+  interests: [Interest.schema],
   users: [{ type: mongoose.Schema.ObjectId, ref: 'User' }]
 });
 
