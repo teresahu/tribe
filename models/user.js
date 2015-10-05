@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
-var Like = require('./like');
+var Interest = require('./interest');
 
 var UserSchema = new mongoose.Schema({
   local: {
@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
   },
   first_name: String,
   last_name: String,
-  likes: [Like.schema],
+  interests: [Interest.schema],
   location: String,
   saved_events: [{ type: mongoose.Schema.ObjectId, ref: 'Event' }]
 });
