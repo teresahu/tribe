@@ -22,6 +22,7 @@ var app = express();
 
 var User = require('./models/user');
 var Event = require('./models/event');
+var Interest = require('./models/interest');
 mongoose.connect('mongodb://localhost/tribe');
 
 // view engine setup

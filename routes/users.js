@@ -1,8 +1,17 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
-var User = require('../models/user');
-var Event = require('../models/event');
+// var User = require('../models/user');
+// var Event = require('../models/event');
+
+var authenticated = function(req, res, next) {
+  if (!req.isAuthenticated()) {
+    res.redirect('/');
+  }
+  else {
+    next();
+  }
+};
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -17,7 +26,7 @@ router.get('/signup', function(req, res, next) {
 // POST /signup
 router.post('/signup', function(req, res, next) {
   var signUpStrategy = passport.authenticate('local-signup', {
-    successRedirect : '/views', // double check route???
+    successRedirect : '/interests/new', // double check route???
     failureRedirect : '/signup',
     failureFlash : true
   });
@@ -33,7 +42,7 @@ router.get('/login', function(req, res, next) {
 // POST /login
 router.post('/login', function(req, res, next) {
   var loginProperty = passport.authenticate('local-login', {
-    successRedirect : '/views',
+    successRedirect : '/interests/new',
     failureRedirect : '/login',
     failureFlash : true
   });
@@ -45,6 +54,11 @@ router.post('/login', function(req, res, next) {
 router.get('/logout', function(req, res, next) {
   req.logout();
   res.redirect('/');
+});
+
+// Show user
+router.get('/profile', authenticated, function(req, res, next) {
+  res.render('./users/profile.ejs', { message: req.flash() });
 });
 
 
