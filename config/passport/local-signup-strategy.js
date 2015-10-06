@@ -8,6 +8,7 @@ var strategy = new LocalStrategy(
     passReqToCallback : true
   },
   function(req, email, password, callback) {
+    console.log('Got HERE');
     // See if a user already has this email
     User.findOne({ 'local.email' : email }, function(err, user) {
       if (err) return callback(err);
@@ -17,6 +18,7 @@ var strategy = new LocalStrategy(
       }
       else {
         // Create a new user.
+        console.log('Creating a new user');
         var newUser = new User();
         newUser.local.email = email;
         newUser.local.password = newUser.encrypt(password);
