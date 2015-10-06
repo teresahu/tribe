@@ -59,7 +59,7 @@ router.get('/logout', function(req, res, next) {
 // Show user
 router.get('/profile', authenticated, function(req, res, next) {
   res.render('./users/profile.ejs', { message: req.flash() });
-})
+});
 
 
 module.exports = router;
