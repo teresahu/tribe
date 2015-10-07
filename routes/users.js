@@ -26,7 +26,7 @@ router.get('/signup', function(req, res, next) {
 // POST /signup
 router.post('/signup', function(req, res, next) {
   var signUpStrategy = passport.authenticate('local-signup', {
-    successRedirect : '/interests/new', // double check route???
+    successRedirect : '/edit', // double check route???
     failureRedirect : '/signup',
     failureFlash : true
   });
@@ -42,7 +42,7 @@ router.get('/login', function(req, res, next) {
 // POST /login
 router.post('/login', function(req, res, next) {
   var loginProperty = passport.authenticate('local-login', {
-    successRedirect : '/interests/new',
+    successRedirect : '/show',
     failureRedirect : '/login',
     failureFlash : true
   });
@@ -56,9 +56,26 @@ router.get('/logout', function(req, res, next) {
   res.redirect('/');
 });
 
+// Edit user
+router.get('/edit', authenticated, function(req, res, next) {
+  res.render('./users/edit.ejs', { message: req.flash() });
+});
+
 // Show user
-router.get('/profile', authenticated, function(req, res, next) {
-  res.render('./users/profile.ejs', { message: req.flash() });
+router.get('/show', authenticated, function(req, res, next) {
+  res.render('./users/show.ejs', { message: req.flash() });
+});
+
+// Create user
+router.post('/edit', authenticated, function(req, res, next) {
+  var interest = {
+    name: name
+  };
+  currentUser.interests.push(interest);
+    currentUser.save(function (err) {
+      if (err) return next(err);
+      res.redirect('/show');
+    });
 });
 
 
