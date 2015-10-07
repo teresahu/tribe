@@ -42,7 +42,7 @@ router.get('/login', function(req, res, next) {
 // POST /login
 router.post('/login', function(req, res, next) {
   var loginProperty = passport.authenticate('local-login', {
-    successRedirect : '/edit',
+    successRedirect : '/show',
     failureRedirect : '/login',
     failureFlash : true
   });
