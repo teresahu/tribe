@@ -1,11 +1,65 @@
 var express = require('express');
+var passport = require('passport');
 var router = express.Router();
-var User = require('../models/user');
-var Event = require('../models/event');
+// var User = require('../models/user');
+// var Event = require('../models/event');
 
-/* GET users listing. */
+var authenticated = function(req, res, next) {
+  if (!req.isAuthenticated()) {
+    res.redirect('/');
+  }
+  else {
+    next();
+  }
+};
+
+/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.render('index', { title: 'Tribe' });
 });
+
+// GET /signup
+router.get('/signup', function(req, res, next) {
+  res.render('./users/signup.ejs', { message: req.flash() });
+});
+
+// POST /signup
+router.post('/signup', function(req, res, next) {
+  var signUpStrategy = passport.authenticate('local-signup', {
+    successRedirect : '/interests/new', // double check route???
+    failureRedirect : '/signup',
+    failureFlash : true
+  });
+
+  return signUpStrategy(req, res, next)
+});
+
+// GET /login
+router.get('/login', function(req, res, next) {
+  res.render('./users/login.ejs', { message: req.flash() });
+});
+
+// POST /login
+router.post('/login', function(req, res, next) {
+  var loginProperty = passport.authenticate('local-login', {
+    successRedirect : '/interests/new',
+    failureRedirect : '/login',
+    failureFlash : true
+  });
+
+  return loginProperty(req, res, next);
+});
+
+// GET /logout
+router.get('/logout', function(req, res, next) {
+  req.logout();
+  res.redirect('/');
+});
+
+// Show user
+router.get('/profile', authenticated, function(req, res, next) {
+  res.render('./users/profile.ejs', { message: req.flash() });
+});
+
 
 module.exports = router;
