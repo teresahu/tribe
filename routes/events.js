@@ -3,7 +3,6 @@ var passport = require('passport');
 var router = express.Router();
 var User = require('../models/user');
 var Event = require('../models/event');
-var Interest = require('../models/interest');
 
 var authenticated = function(req, res, next) {
   if (!req.isAuthenticated()) {

@@ -1,8 +1,6 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
-// var User = require('../models/user');
-// var Event = require('../models/event');
 
 var authenticated = function(req, res, next) {
   if (!req.isAuthenticated()) {
@@ -63,19 +61,24 @@ router.get('/edit', authenticated, function(req, res, next) {
 
 // Show user
 router.get('/show', authenticated, function(req, res, next) {
-  res.render('./users/show.ejs', { message: req.flash() });
+  // get user here
+  res.render('./users/show.ejs', { message: req.flash(),
+                            //       user: user
+                                 });
 });
 
 // Create user
-router.post('/edit', authenticated, function(req, res, next) {
-  var interest = {
-    name: name
-  };
-  currentUser.interests.push(interest);
-    currentUser.save(function (err) {
-      if (err) return next(err);
-      res.redirect('/show');
-    });
+router.put('/edit', authenticated, function(req, res, next) {
+  console.log(JSON.stringify(req.body));
+  currentUser.interests = [];
+  req.body.interests.forEach(function(int){
+    currentUser.interests.push(int);
+  });
+  console.log(currentUser.interests);
+  currentUser.save(function (err) {
+    if (err) return next(err);
+    res.redirect('/show');
+  });
 });
 
 

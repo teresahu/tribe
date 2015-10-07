@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
-var Interest = require('./interest');
 
 var UserSchema = new mongoose.Schema({
   local: {
@@ -9,7 +8,7 @@ var UserSchema = new mongoose.Schema({
   },
   first_name: String,
   last_name: String,
-  interests: [Interest.schema],
+  interests: [String],
   location: String,
   saved_events: [{ type: mongoose.Schema.ObjectId, ref: 'Event' }]
 });
