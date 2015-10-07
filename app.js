@@ -11,6 +11,8 @@ var passport = require('passport');
 var session = require('express-session');
 var flash = require('connect-flash');
 
+var expressLayouts = require('express-ejs-layouts');
+
 // var routes = require('./routes/index');
 var users = require('./routes/users');
 var events = require('./routes/events');
