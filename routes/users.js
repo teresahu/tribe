@@ -61,10 +61,8 @@ router.get('/edit', authenticated, function(req, res, next) {
 
 // Show user
 router.get('/show', authenticated, function(req, res, next) {
-  // get user here
-  res.render('./users/show.ejs', { message: req.flash(),
-                            //       user: user
-                                 });
+  var user = currentUser.interests
+  res.render('./users/show.ejs', { user: user, message: req.flash() });
 });
 
 // Create user
