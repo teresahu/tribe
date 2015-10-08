@@ -1,15 +1,4 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+a:focus, a:hover {
+    color: #35b278;
+    text-decoration: underline;
 }
-
-a {
-  color: #00B7FF;
-}
-
-/*footer {
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-}*/
