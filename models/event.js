@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
-var Interest = require('./interest');
+
 
 var EventSchema = new mongoose.Schema({
   name: String,
-  interests: [Interest.schema],
+  interests: [String],
   users: [{ type: mongoose.Schema.ObjectId, ref: 'User' }]
 });
 

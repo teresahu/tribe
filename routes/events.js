@@ -3,7 +3,6 @@ var passport = require('passport');
 var router = express.Router();
 var User = require('../models/user');
 var Event = require('../models/event');
-var Interest = require('../models/interest');
 
 var authenticated = function(req, res, next) {
   if (!req.isAuthenticated()) {
@@ -16,6 +15,19 @@ var authenticated = function(req, res, next) {
 
 // Index
 router.get('/', authenticated, function(req, res, next) {
+  var intersection = [];
+
+for (var i=0; i<user[0].interests.length; i++) {
+    for (var k=0; k<events.length; k++) {
+        for (var j=0; j<events[k].interests.length; j++)         {
+            if (user[0].interests[i] === events[k].interests[j]);
+            {
+                //if (!intersection.contains(events[0].name) {
+                intersection.push(events[k].name);
+            }
+        }
+    }
+}
   res.render('./events/index.ejs', { message: req.flash() });
 });
 
