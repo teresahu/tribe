@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
+var Event= require('../models/event');
 
 var authenticated = function(req, res, next) {
   if (!req.isAuthenticated()) {
@@ -75,6 +76,12 @@ router.put('/edit', authenticated, function(req, res, next) {
   console.log(currentUser.interests);
   currentUser.save(function (err) {
     if (err) return next(err);
+    var events1;
+    Event.findOne({name: "Ponce Party"}, function(err, e){
+      if (err) console.log(err);
+      events1 = e;
+    console.log(events1);
+    });
     res.redirect('/show');
   });
 });
