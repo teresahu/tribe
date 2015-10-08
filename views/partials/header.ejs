@@ -1,24 +1,29 @@
+
+
 <div class="masthead clearfix">
-  <div class="inner">
-    <h3 class="masthead-brand">TRIBE</h3>
-    <nav>
-      <ul class="nav masthead-nav">
-        <li><a href="/">Home</a></li>
-        <li><a href="#">Features</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-      <ul class="nav masthead-nav">
-        <% if (currentUser) { %>
-          <li><a href="/show"><%= currentUser.local.email %></a></li>
-          <li><a href="/logout">Logout</a></li>
-        <% } else { %>
-          <!-- <li><a href="/login">Login</a></li>
-          <li><a href="/signup">Signup</a></li> -->
-        <% } %>
-      </ul>
-    </nav>
+    <h3 class="masthead-brand nav"><a href="/">TRIBE</h3></a>
+
+
+ <!-- Navigation -->
+
+  <div class="b-nav">
+    <li><a class="b-link b-link--active" href="/">Home</a></li>
+    <li><a class="b-link" href="#">About</a></li>
+    <li><a class="b-link" href="#">Contact</a></li>
   </div>
-</div>
+
+  <!-- Burger-Icon -->
+  <div class="b-container">
+    <div class="b-menu">
+      <div class="b-bun b-bun--top"></div>
+      <div class="b-bun b-bun--mid"></div>
+      <div class="b-bun b-bun--bottom"></div>
+    </div>
+
+    <!-- Burger-Brand -->
+    <a href="/" class="b-brand"></a>
+
+
 
 <div class="flash">
   <% if (typeof message !== 'undefined') { %>
@@ -33,3 +38,6 @@
     <% } %>
   <% } %>
 </div>
+ </div>
+
+  </div>
