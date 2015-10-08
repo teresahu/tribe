@@ -23,7 +23,12 @@ var app = express();
 
 var User = require('./models/user');
 var Event = require('./models/event');
-mongoose.connect('mongodb://localhost/tribe');
+if (app.get('env') === 'development') {
+  mongoose.connect('mongodb://localhost/tribe');
+}
+else {
+  mongoose.connect(process.env.MONGOLAB_URI);
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
