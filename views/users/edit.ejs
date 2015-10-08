@@ -2,44 +2,58 @@
       </div>
     </nav>
 
-    <div class="container">
+ <body>
+  <div class="site-wrapper">
+    <div class="inner">
 
-      <div class="starter-template">
-        <h1>Tell us a little more about yourself!</h1>
-        <p class="lead">Your interests are a way for us to figure out what tribe you should be in,
-          so clickity click on the things you're interested in down below to find your tribe!</p>
+  <div class="row">
+    <div class="col-md-12">
+        <h1>Choose Interests</h1>
+          <p class="lead">Help us find you a tribe</p>
       </div>
-    <form name="InterestCategories" method="POST" action="/edit?_method=PUT">
-      <div>
-       Movie Types
-          <div class="checkbox">
+
+    <form name="InterestCategories" method="post" action="/edit?_method=PUT">
+
+      <div class="row">
+      <div class="col-md-6">
+      <h3>Movie Types</h3>
+
+        <div class="checkbox">
           <label>
             <input type="checkbox" name='interests[]' value="Comedy">Comedy
           </label>
-          </div>
-          <div class="checkbox">
+        </div>
+
+        <div class="checkbox">
           <label>
             <input type="checkbox" name='interests[]' value="Adventure">Adventure
           </label>
-          </div>
-          <div class="checkbox">
+        </div>
+
+        <div class="checkbox">
           <label>
             <input type="checkbox" name='interests[]' value="Action">Action
           </label>
-          </div>
-          <div class="checkbox">
+        </div>
+
+        <div class="checkbox">
           <label>
             <input type="checkbox" name='interests[]' value="Drama">Drama
           </label>
-          </div>
-          <div class="checkbox">
+        </div>
+
+        <div class="checkbox">
           <label>
             <input type="checkbox" name='interests[]' value="Romance">Romance
           </label>
-          </div>
+        </div>
       </div>
+
+
+      <div class="col-md-6">
       <div>
-        Sports
+        <h3>Sports</h3>
+
           <div class="checkbox">
           <label>
             <input type="checkbox" name='interests[]' value="Soccer">Soccer
@@ -65,9 +79,14 @@
             <input type="checkbox" name='interests[]' value="Rugby">Rugby
           </label>
           </div>
-      </div>
+</div>
+</div>
+
+<div class="row">
+      <div class="col-md-6">
       <div>
-        Food
+        <h3>Food</h3>
+
           <div class="checkbox">
           <label>
             <input type="checkbox" name='interests[]' value="Chinese">Chinese
@@ -94,8 +113,12 @@
           </label>
           </div>
       </div>
+      </div>
+
+
+<div class="col-md-6">
       <div>
-        Health and Fitness
+        <h3>Health and Fitness</h3>
           <div class="checkbox">
           <label>
             <input type="checkbox" name='interests[]' value="Running">Running
@@ -122,8 +145,13 @@
           </label>
           </div>
       </div>
+</div>
+
+
+<div class="row">
+<div class="col-md-4-4"
       <div>
-        Music
+        <h3>Music</h3>
           <div class="checkbox">
           <label>
             <input type="checkbox" name='interests[]' value="Rock">Rock
@@ -150,10 +178,31 @@
           </label>
           </div>
       </div>
+</div>
+</div>
+
+</div>
+</div>
+</form>
+<br>
+<br>
       <div>
         <input class="btn btn-default" type="submit" value="Submit">
       </div>
+
     </form>
+</div>
+
+       <script>
+
+        // var x=document.getElementsByTagName("input");
+        // alert(x.length);
+        var form = document.getElementById("InterestCategories");
+        var inputs = document.getElementsByTagName("input");
+        var newArr = [];
+
+        console.log(newArr);
+     </script>
 
     </div><!-- /.container -->
 
@@ -163,4 +212,3 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   </main>
-
