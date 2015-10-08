@@ -19,6 +19,17 @@ router.get('/new', authenticated, function(req, res, next) {
   res.render('./interests/new.ejs', { message: req.flash() });
 });
 
+// POST /interest
+// router.post('/interests', function(req, res, next) {
+//   var signUpStrategy = passport.authenticate('local-signup', {
+//     successRedirect : '/events', // double check route???
+//     failureRedirect : '/interests/new',
+//     failureFlash : true
+//   });
+
+//    return signUpStrategy(req, res, next)
+// });
+
 // Edit
 router.get('/:id/edit', authenticated, function(req, res, next) {
   res.render('./interests/edit.ejs', { message: req.flash() });
