@@ -1,64 +1,48 @@
   <main>
 
-<!--     <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Tribe</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav> -->
+ <body>
+    <div class="site-wrapper">
 
-    <div class="container">
+    <div class="inner">
 
-      <div class="starter-template">
-        <h1>Tell us a little more about yourself!</h1>
-        <p class="lead">Your interests are a way for us to figure out what tribe you should be in,
-          so clickity click on the things you're interested in down below to find your tribe!</p>
+  <div class="row">
+    <div class="col-md-12">
+        <h1>Choose Interests</h1>
+          <p class="lead">Help us find you a tribe</p>
       </div>
+
     <form name="InterestCategories" method="post" action="/events/index">
-      <div>
-        Movie Types
-          <div class="checkbox">
-          <label>
-            <input type="checkbox" value="Comedy">Comedy
-          </label>
+
+      <div class="row">
+      <div class="col-md-6">
+      <h3>Movie Types</h3>
+
+      <div class="checkbox">
+          <label><input type="checkbox" value="Comedy">Comedy</label>
+      </div>
+
+      <div class="checkbox">
+          <label><input type="checkbox" value="Comedy">Adventure</label>
           </div>
+
           <div class="checkbox">
-          <label>
-            <input type="checkbox" value="Comedy">Adventure
-          </label>
+          <label><input type="checkbox" value="Comedy">Action</label>
           </div>
+
           <div class="checkbox">
-          <label>
-            <input type="checkbox" value="Comedy">Action
-          </label>
+          <label><input type="checkbox" value="Comedy">Drama</label>
           </div>
+
           <div class="checkbox">
-          <label>
-            <input type="checkbox" value="Comedy">Drama
-          </label>
-          </div>
-          <div class="checkbox">
-          <label>
-            <input type="checkbox" value="Comedy">Romance2
-          </label>
+          <label><input type="checkbox" value="Comedy">Romance</label>
           </div>
       </div>
+
+
+      <div class="col-md-6">
       <div>
-        Sports
+        <h3>Sports</h3>
+
           <div class="checkbox">
           <label>
             <input type="checkbox" value="Comedy">Soccer
@@ -84,9 +68,14 @@
             <input type="checkbox" value="Comedy">Rugby
           </label>
           </div>
-      </div>
+</div>
+</div>
+
+<div class="row">
+      <div class="col-md-6">
       <div>
-        Food
+        <h3>Food</h3>
+
           <div class="checkbox">
           <label>
             <input type="checkbox" value="Comedy">Chinese
@@ -113,8 +102,12 @@
           </label>
           </div>
       </div>
+      </div>
+
+
+<div class="col-md-6">
       <div>
-        Health and Fitness
+        <h3>Health and Fitness</h3>
           <div class="checkbox">
           <label>
             <input type="checkbox" value="Comedy">Running
@@ -141,8 +134,13 @@
           </label>
           </div>
       </div>
+</div>
+
+
+<div class="row">
+<div class="col-md-4-4"
       <div>
-        Music
+        <h3>Music</h3>
           <div class="checkbox">
           <label>
             <input type="checkbox" value="Comedy">Rock
@@ -169,11 +167,18 @@
           </label>
           </div>
       </div>
+</div>
+</div>
+
+</div>
+</div>
+</form>
+<br>
+<br>
       <div>
         <input class="btn btn-default" type="submit" value="Submit">
       </div>
-    </form>
-
+</div>
 
        <script>
 
@@ -193,5 +198,5 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  </body>
   </main>
-
