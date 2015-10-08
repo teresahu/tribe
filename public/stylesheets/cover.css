@@ -147,3 +147,14 @@ position: absolute;
 /*
  * Footer End
  */
+
+
+ /*
+  * Bootstrap OVerrides
+  */
+
+.btn-info {
+    color: #fff;
+    background-color: chocolate;
+    border-color: #46b8da;
+}
