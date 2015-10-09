@@ -12,6 +12,28 @@ var authenticated = function(req, res, next) {
   }
 };
 
+function findInArray(arr, name) {
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].name === name) {
+      return arr[i];
+    }
+  }
+  return null;
+}
+
+function sortArray(arr) {
+  arr.sort(function (a, b) {
+    if (a.count > b.count) {
+      return -1;
+    }
+    if (a.count < b.count) {
+      return 1;
+    }
+    // a must be equal to b
+    return 0;
+  });
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Tribe' });
@@ -62,11 +84,12 @@ router.get('/edit', authenticated, function(req, res, next) {
 
 // Show user
 router.get('/show', authenticated, function(req, res, next) {
-  var user = currentUser.interests
-  res.render('./users/show.ejs', { user: user, message: req.flash() });
+  var user = currentUser.interests;
+  var results = req.session.results ? req.session.results : [];
+  res.render('./users/show.ejs', { user: user, results: results, message: req.flash() });
 });
 
-// Create user
+// update/Create user
 router.put('/edit', authenticated, function(req, res, next) {
   currentUser.interests = [];
   req.body.interests.forEach(function(int){
@@ -76,43 +99,35 @@ router.put('/edit', authenticated, function(req, res, next) {
   currentUser.save(function (err) {
     if (err) return next(err);
      var intersection = [];
-     var events = [];
-     Event.find({}, function(err, e){
-      console.log('This better work' + e);
+     Event.find({}, function(err, events){
       if (err) console.log(err);
-      events.push(e);
       console.log(events);
-      return events;
-     });
       for (var i=0; i<currentUser.interests.length; i++) {
-          for (var k=0; k<events.length; k++) {
-              for (var j=0; j<events[k].interests.length; j++)         {
-                  if (currentUser.interests[i] === events[k].interests[j]);
-                  {
-                      intersection.push(events[k].name);
-                  }
-              }
+        for (var k=0; k<events.length; k++) {
+          for (var j=0; j<events[k].interests.length; j++) {
+            if (currentUser.interests[i] === events[k].interests[j]) {
+              intersection.push(events[k].name);
+            }
           }
+        }
       }
       console.log(intersection);
-      var arr = intersection;
-      var obj = { };
-      for (var i = 0, j = arr.length; i < j; i++) {
-         if (obj[arr[i]]) {
-            obj[arr[i]]++;
-         }
-         else {
-            obj[arr[i]] = 1;
-         }
+      var results = [];
+      for (var i = 0, j = intersection.length; i < j; i++) {
+        var found = findInArray(results, intersection[i]);
+        if (found) {
+          found.count++;
+        }
+        else {
+          results.push({ name: intersection[i], count: 1 });
+        }
       }
-        console.log(obj);
-    // var events1;
-    // Event.findOne({name: "Ponce Party"}, function(err, e){
-    //   if (err) console.log(err);
-    //   events1 = e;
-    // console.log(events1);
-    // });
-    res.redirect('/show');
+      sortArray(results);
+      console.log(results);
+      console.log('req.session:', req.session);
+      req.session.results = results;
+      res.redirect('/show');
+    });
   });
 });
 
