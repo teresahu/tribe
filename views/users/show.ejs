@@ -1,5 +1,7 @@
   <main>
-
+<% results.forEach(function (result) { %>
+  <p> <%= result.name + ' : ' + result.count %> </p>
+<% }) %>
     <hr>
 <div class="container">
   <div class="row">
