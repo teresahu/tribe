@@ -1,8 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
-// var User = require('../models/user');
-// var Event = require('../models/event');
+var Event= require('../models/event');
 
 var authenticated = function(req, res, next) {
   if (!req.isAuthenticated()) {
@@ -12,6 +11,28 @@ var authenticated = function(req, res, next) {
     next();
   }
 };
+
+function findInArray(arr, name) {
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].name === name) {
+      return arr[i];
+    }
+  }
+  return null;
+}
+
+function sortArray(arr) {
+  arr.sort(function (a, b) {
+    if (a.count > b.count) {
+      return -1;
+    }
+    if (a.count < b.count) {
+      return 1;
+    }
+    // a must be equal to b
+    return 0;
+  });
+}
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -63,19 +84,51 @@ router.get('/edit', authenticated, function(req, res, next) {
 
 // Show user
 router.get('/show', authenticated, function(req, res, next) {
-  res.render('./users/show.ejs', { message: req.flash() });
+  var user = currentUser.interests;
+  var results = req.session.results ? req.session.results : [];
+  res.render('./users/show.ejs', { user: user, results: results, message: req.flash() });
 });
 
-// Create user
-router.post('/edit', authenticated, function(req, res, next) {
-  var interest = {
-    name: name
-  };
-  currentUser.interests.push(interest);
-    currentUser.save(function (err) {
-      if (err) return next(err);
+// update/Create user
+router.put('/edit', authenticated, function(req, res, next) {
+  currentUser.interests = [];
+  req.body.interests.forEach(function(int){
+    currentUser.interests.push(int);
+  });
+  console.log(currentUser.interests);
+  currentUser.save(function (err) {
+    if (err) return next(err);
+     var intersection = [];
+     Event.find({}, function(err, events){
+      if (err) console.log(err);
+      console.log(events);
+      for (var i=0; i<currentUser.interests.length; i++) {
+        for (var k=0; k<events.length; k++) {
+          for (var j=0; j<events[k].interests.length; j++) {
+            if (currentUser.interests[i] === events[k].interests[j]) {
+              intersection.push(events[k].name);
+            }
+          }
+        }
+      }
+      console.log(intersection);
+      var results = [];
+      for (var i = 0, j = intersection.length; i < j; i++) {
+        var found = findInArray(results, intersection[i]);
+        if (found) {
+          found.count++;
+        }
+        else {
+          results.push({ name: intersection[i], count: 1 });
+        }
+      }
+      sortArray(results);
+      console.log(results);
+      console.log('req.session:', req.session);
+      req.session.results = results;
       res.redirect('/show');
     });
+  });
 });
 
 

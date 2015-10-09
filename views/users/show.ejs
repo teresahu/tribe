@@ -1,4 +1,9 @@
-  <main>
+<main>
+
+<% results.forEach(function (result) { %>
+  <p> <%= result.name + ' : ' + result.count %> </p>
+<% }) %>
+<hr>
 
 <div class="container">
             <div class="cover">
@@ -53,4 +58,3 @@
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
   </main>
-

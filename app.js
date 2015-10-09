@@ -16,7 +16,6 @@ var expressLayouts = require('express-ejs-layouts');
 // var routes = require('./routes/index');
 var users = require('./routes/users');
 var events = require('./routes/events');
-var interests = require('./routes/interests');
 
 var app = express();
 
@@ -24,8 +23,12 @@ var app = express();
 
 var User = require('./models/user');
 var Event = require('./models/event');
-var Interest = require('./models/interest');
-mongoose.connect('mongodb://localhost/tribe');
+if (app.get('env') === 'development') {
+  mongoose.connect('mongodb://localhost/tribe');
+}
+else {
+  mongoose.connect(process.env.MONGOLAB_URI);
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,7 +39,8 @@ app.use(expressLayouts);
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -56,7 +60,6 @@ app.use(function(req, res, next) {
 // app.use('/', routes);
 app.use('/', users);
 app.use('/events', events);
-app.use('/interests', interests);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
