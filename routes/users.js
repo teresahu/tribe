@@ -68,7 +68,6 @@ router.get('/show', authenticated, function(req, res, next) {
 
 // Create user
 router.put('/edit', authenticated, function(req, res, next) {
-  console.log(JSON.stringify(req.body));
   currentUser.interests = [];
   req.body.interests.forEach(function(int){
     currentUser.interests.push(int);
@@ -76,12 +75,43 @@ router.put('/edit', authenticated, function(req, res, next) {
   console.log(currentUser.interests);
   currentUser.save(function (err) {
     if (err) return next(err);
-    var events1;
-    Event.findOne({name: "Ponce Party"}, function(err, e){
+     var intersection = [];
+     var events = [];
+     Event.find({}, function(err, e){
+      console.log('This better work' + e);
       if (err) console.log(err);
-      events1 = e;
-    console.log(events1);
-    });
+      events.push(e);
+      console.log(events);
+      return events;
+     });
+      for (var i=0; i<currentUser.interests.length; i++) {
+          for (var k=0; k<events.length; k++) {
+              for (var j=0; j<events[k].interests.length; j++)         {
+                  if (currentUser.interests[i] === events[k].interests[j]);
+                  {
+                      intersection.push(events[k].name);
+                  }
+              }
+          }
+      }
+      console.log(intersection);
+      var arr = intersection;
+      var obj = { };
+      for (var i = 0, j = arr.length; i < j; i++) {
+         if (obj[arr[i]]) {
+            obj[arr[i]]++;
+         }
+         else {
+            obj[arr[i]] = 1;
+         }
+      }
+        console.log(obj);
+    // var events1;
+    // Event.findOne({name: "Ponce Party"}, function(err, e){
+    //   if (err) console.log(err);
+    //   events1 = e;
+    // console.log(events1);
+    // });
     res.redirect('/show');
   });
 });
