@@ -9,7 +9,15 @@
   <div class="b-nav">
     <li><a class="b-link b-link--active" href="/">Home</a></li>
     <li><a class="b-link" href="#">About</a></li>
-    <li><a class="b-link" href="#">Contact</a></li>
+    <li><a class="b-link" href="/events">Events</a></li>
+        <% if (currentUser) { %>
+          <li><a class="b-link" href="/show"><%= currentUser.local.email %></a></li>
+          <li><a class="b-link" href="/logout">Logout</a></li>
+        <% } else { %>
+          <!-- <li class="b-link"><a href="/login">Login</a></li>
+          <li><a class="b-link" href="/signup">Signup</a></li> -->
+        <% } %>
+
   </div>
 
   <!-- Burger-Icon -->
